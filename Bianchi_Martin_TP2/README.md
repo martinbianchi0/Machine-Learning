@@ -23,6 +23,7 @@ Este trabajo práctico aborda dos problemas de clasificación:
   Clasificación multiclase para predecir la categoría de impacto de jugadores en base a estadísticas. Se utilizan tres modelos: Regresión Logística Multiclase, Análisis Discriminante Lineal (LDA) y Random Forest.
 
 ## 📂 Estructura del Proyecto
+```
 Apellido_Nombre_TP2.zip
 │── Problema1/                      # Clasificación binaria - Cáncer de mama
 │   │── data/
@@ -63,6 +64,7 @@ Apellido_Nombre_TP2.zip
 │── Apellido_Nombre_Informe.pdf          # Informe con explicación y resultados
 │── requirements.txt                     # Librerías utilizadas en el proyecto
 │── README.md                            # Documentación del proyecto
+```
 
 ## 📊 Contenido del Trabajo
 
