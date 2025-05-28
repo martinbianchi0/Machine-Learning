@@ -1,6 +1,7 @@
 from .metrics import mse, silhouette_manual, final_inertia, final_loglikelihood
 from .dreduction import VAE, pca_transform_reconstruct
 from .clustering import kmeans, GMM, DBSCAN
+from .visualization import plot_mse_vs_latent
 import pandas as pd
 import numpy as np
 
@@ -97,7 +98,7 @@ def explore_pca(X, max_k, step=1):
 
     return ks, errors
 
-def explore_vaes(X_train, X_val, configs, epochs=30, early_stopping=True):
+def explore_vaes(X_train, X_val, configs, epochs=30, early_stopping=True, plot_latent_mse=False):
     """
     Entrena varios modelos VAE y selecciona el que tiene menor MSE en validación.
 
@@ -107,12 +108,15 @@ def explore_vaes(X_train, X_val, configs, epochs=30, early_stopping=True):
         - configs: Lista de configuraciones VAE a evaluar.
         - epochs: Número de épocas de entrenamiento.
         - early_stopping: Si usar detención temprana.
+        - plot_latent_mse: Si graficar MSE vs. dimensión latente al final.
 
     Retorna:
         - El mejor modelo VAE entrenado.
     """
     resultados = []
-    
+    latents = []
+    mses = []
+
     for config in configs:
         vae = VAE(
             input_dim=784,
@@ -132,10 +136,16 @@ def explore_vaes(X_train, X_val, configs, epochs=30, early_stopping=True):
         recon = vae.reconstruct(X_val)
         error = mse(X_val, recon)
         resultados.append((vae, config, error))
+        latents.append(config["latent_dim"])
+        mses.append(error)
         print(f"Capas: {config['hidden_dims']} | MSE validación: {error:.4f}")
     
     mejor = min(resultados, key=lambda x: x[2])
     print("\n=== Mejor modelo ===")
     print(f"Config: {mejor[1]}")
-    print(f"Capas: {config['hidden_dims']} | MSE validación: {mejor[2]:.4f}")
+    print(f"Capas: {mejor[1]['hidden_dims']} | MSE validación: {mejor[2]:.4f}")
+
+    if plot_latent_mse:
+        plot_mse_vs_latent(latents, mses)
+
     return mejor[0]

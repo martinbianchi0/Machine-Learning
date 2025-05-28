@@ -1,10 +1,11 @@
 from IPython.display import display
 import matplotlib.pyplot as plt
+from matplotlib import gridspec
 import seaborn as sns
 import pandas as pd
 import numpy as np
 
-def explore_data(df):
+def view_data(df):
     """Imprime un resumen del dataset combinado: muestra aleatoria, rango de valores,
     columnas con nulos y cantidad de duplicados.
 
@@ -167,6 +168,7 @@ def plot_pca_errors(ks, errors):
 def plot_reconstructions(X, X_reconstructed, titles=["Original", "Reconstruida"]):
     """
     Muestra comparaciones entre imágenes originales y reconstruidas.
+    Incluye una grilla principal con 10 imágenes y una comparación destacada al costado.
 
     Parámetros:
         - X: Imágenes originales.
@@ -174,21 +176,54 @@ def plot_reconstructions(X, X_reconstructed, titles=["Original", "Reconstruida"]
         - titles: Títulos para cada fila (original y reconstruida).
     """
     n = 10
-    plt.figure(figsize=(10, 4))
+    fig = plt.figure(figsize=(14, 4))
+    gs = gridspec.GridSpec(2, n + 3, width_ratios=[1]*n + [0.3, 0.3, 1.5], wspace=0.1, hspace=0.05)
 
     for i in range(n):
-        # Original
-        plt.subplot(2, n, i + 1)
-        plt.imshow(X[i].reshape(28, 28), cmap='gray')
-        plt.axis('off')
+        ax_orig = plt.subplot(gs[0, i])
+        ax_recon = plt.subplot(gs[1, i])
+        
+        ax_orig.imshow(X[i].reshape(28, 28), cmap='gray')
+        ax_recon.imshow(X_reconstructed[i].reshape(28, 28), cmap='gray')
+        
+        ax_orig.axis('off')
+        ax_recon.axis('off')
+        
         if i == 0:
-            plt.title(titles[0])
-        # Reconstruida
-        plt.subplot(2, n, i + 1 + n)
-        plt.imshow(X_reconstructed[i].reshape(28, 28), cmap='gray')
-        plt.axis('off')
-        if i == 0:
-            plt.title(titles[1])
+            ax_orig.set_title(titles[0])
+            ax_recon.set_title(titles[1])
 
+    # Comparación destacada al costado (índice 2)
+    ax_big_orig = plt.subplot(gs[0, -1])
+    ax_big_recon = plt.subplot(gs[1, -1])
+    
+    ax_big_orig.imshow(X[2].reshape(28, 28), cmap='gray')
+    ax_big_recon.imshow(X_reconstructed[2].reshape(28, 28), cmap='gray')
+    
+    ax_big_orig.set_title(titles[0], fontsize=10)
+    ax_big_recon.set_title(titles[1], fontsize=10)
+
+    ax_big_orig.axis('off')
+    ax_big_recon.axis('off')
+
+    plt.tight_layout()
+    plt.show()
+
+def plot_mse_vs_latent(latent_dims, mses):
+    """
+    Grafica un histograma del MSE de validación en función del tamaño del espacio latente.
+
+    Parámetros:
+        - latent_dims: Lista de dimensiones latentes evaluadas.
+        - mses: Lista de errores MSE correspondientes a cada configuración.
+    """
+    import matplotlib.pyplot as plt
+    plt.figure(figsize=(8, 4))
+    plt.bar(latent_dims, mses, width=1.5, color='skyblue', edgecolor='black')
+    plt.xlabel("Dimensión del espacio latente")
+    plt.ylabel("MSE en validación")
+    plt.title("Error de reconstrucción vs. dimensión latente")
+    plt.xticks(sorted(set(latent_dims)))
+    plt.grid(axis='y', linestyle='--', alpha=0.6)
     plt.tight_layout()
     plt.show()

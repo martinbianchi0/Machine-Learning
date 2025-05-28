@@ -37,8 +37,8 @@ Bianchi_Martin_TP4/
 │   │── clustering.py                 # Modelos de clustering no supervisado
 │   │── dreduction.py                 # Métodos de reducción de dimensionalidad
 │
-│── Bianchi_Martin_Informe_TP3.pdf    # Informe teórico-metodológico del trabajo
-│── Bianchi_Martin_Notebook_TP3.ipynb # Desarrollo técnico y pruebas
+│── Bianchi_Martin_Informe_TP4.pdf    # Informe teórico-metodológico del trabajo
+│── Bianchi_Martin_Notebook_TP4.ipynb # Desarrollo técnico y pruebas
 │── requirements.txt                  # Dependencias utilizadas
 │── README.md                         # Este archivo
 ```
