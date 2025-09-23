@@ -1,12 +1,12 @@
-# I302 - Aprendizaje Automático y Profundo (1C 2025)
+# Aprendizaje Automático y Profundo 
 
-Este repositorio contiene los cuatro trabajos prácticos realizados para la materia **I302 - Aprendizaje Automático y Aprendizaje Profundo** (1er cuatrimestre 2025, UdeSA). Cada trabajo aborda una temática distinta del aprendizaje automático, con implementaciones propias, análisis experimentales y documentación completa.
+Este repositorio contiene cuatro trabajos realizados en base a Aprendizaje Automático y Aprendizaje Profundo. Cada trabajo aborda una temática distinta del aprendizaje automático, con implementaciones propias, análisis experimentales y documentación completa.
 
 ---
 
 ## 📁 Contenido
 
-### 🔹 TP1 - Regresión
+### 🔹 Trabajo 1 - Regresión
 Implementación desde cero de modelos de regresión lineal para estimar precios de viviendas.  
 Incluye:
 - Regresión simple y multivariable
@@ -15,7 +15,7 @@ Incluye:
 - Selección de modelos con métricas MAE y RMSE  
 📂 Carpeta: [`TP1/`](./TP1)
 
-### 🔹 TP2 - Clasificación
+### 🔹 Trabajo 2 - Clasificación
 Dos problemas: 
 - Diagnóstico de cáncer de mama (clasificación binaria con datos desbalanceados)
 - Rendimiento de jugadores de basketball (clasificación multiclase)  
@@ -25,7 +25,7 @@ Modelos implementados:
 - Random Forest  
 📂 Carpeta: [`TP2/`](./TP2)
 
-### 🔹 TP3 - Redes Neuronales
+### 🔹 Trabajo 3 - Redes Neuronales
 Clasificación multiclase de caracteres japoneses con redes neuronales.  
 Incluye:
 - Implementación propia de MLP
@@ -34,7 +34,7 @@ Incluye:
 - Comparación de arquitecturas  
 📂 Carpeta: [`TP3/`](./TP3)
 
-### 🔹 TP4 - Clustering y Reducción de Dimensionalidad
+### 🔹 Trabajo 4 - Clustering y Reducción de Dimensionalidad
 Análisis sin supervisión sobre dos datasets usando:
 - K-means, GMM, DBSCAN
 - PCA implementado desde cero
@@ -51,4 +51,5 @@ Cada carpeta tiene su propio `requirements.txt` con las dependencias específica
 cd TP1/
 python -m venv env
 source env/bin/activate  # o env\Scripts\activate en Windows
+
 pip install -r requirements.txt
